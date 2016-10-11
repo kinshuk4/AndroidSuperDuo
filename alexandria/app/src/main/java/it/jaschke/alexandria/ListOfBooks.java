@@ -32,14 +32,34 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
     public ListOfBooks() {
     }
 
+    // BUG_FIX : Showing blank fragment on screen rotation/screenlock
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        getActivity().getSupportFragmentManager().putFragment(outState, "list_of_books", ListOfBooks.this);
+    }
+
+    // BUG_FIX Action title bar getting changed from
+    //"List of Books" to "Alexandria" on device rotation
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.books);
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null) {
+            Fragment newFragment = getActivity().getSupportFragmentManager().getFragment(savedInstanceState, "list_of_books");
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, newFragment).commit();
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         Cursor cursor = getActivity().getContentResolver().query(
                 AlexandriaContract.BookEntry.CONTENT_URI,
                 null, // leaving "columns" null just returns all the columns.

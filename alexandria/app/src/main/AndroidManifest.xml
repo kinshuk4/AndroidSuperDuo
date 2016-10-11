@@ -3,6 +3,8 @@
     package="it.jaschke.alexandria" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -41,6 +43,15 @@
             android:name=".services.BookService"
             android:exported="false" >
         </service>
+
+        <activity
+            android:name=".ScannerActivity"
+            android:label="@string/title_activity_scanner"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.jaschke.alexandria.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -35,6 +35,14 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     public BookDetail(){
     }
 
+    // NOTE: Change actionbar title to "Book Details"
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.details);
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

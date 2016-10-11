@@ -14,6 +14,14 @@ public class About extends Fragment {
 
     }
 
+   //BUG_FIX: Action title bar getting removed from 
+   //"Scan/Add a book" to Alexandria on Device rotation/Screen lock
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.about);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
